@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <title>FCC - Evolution of Low Power FM Stations</title>
+    <link rel="shortcut icon" href="http://cartodb.com/favicon/favicon_32x32.ico" />
+    <link href="http://code.google.com/apis/maps/documentation/javascript/examples/default.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="css/cartodb.css">
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+    <script type="text/javascript" src="lib/wax.g.js"></script>
+    <script type="text/javascript" src="lib/cartodb-gmapsv3.js"></script>
+    <script type="text/javascript" src="lib/dat.gui.min.js"></script>
+    <script type="text/javascript" src="lib/underscore-min.js"></script>
+    <script type="text/javascript" src="lib/backbone.js"></script>
+    <script type="text/javascript" src="lib/class.js"></script>
+    <script type="text/javascript" src="lib/backbone.cartodb.js"></script>
+    <script type="text/javascript" src="src/canvas_tile_layer.js"></script>
+    <script type="text/javascript" src="src/grid_layer.js"></script>
+    <script type="text/javascript" src="src/torque.js"></script>
+    <script type="text/javascript">
+    var gui;
+    var map;
+    var torque = null;
+    var endOfPlay=false;
+   
+    function initialize() {
+        // initialise the google map
+         map = new google.maps.Map(document.getElementById('map_canvas'), {
+            //center:new google.maps.LatLng(39.5,-98),
+             center:new google.maps.LatLng(44,-98),
+            zoom:4,
+            mapTypeId:google.maps.MapTypeId.SATELLITE,
+            mapTypeControl:false,
+            minZoom:1
+        });
+
+        var map_style = {};
+        map_style.google_maps_customization_style = [
+            {
+                stylers:[
+                    { invert_lightness:true },
+                    { weight:1 },
+                    { saturation:-100 },
+                    { lightness:-40 }
+                ]
+            },
+            {
+                elementType:"labels",
+                stylers:[
+                    { visibility:"simplified" }
+                ]
+            }
+        ];
+
+        var Soft = function () {
+            this.Soft = function () {
+                map.setMapTypeId(google.maps.MapTypeId.ROADMAP);
+                map.setOptions({styles:map_style.google_maps_customization_style});
+            }
+        }
+
+
+        map.setMapTypeId(google.maps.MapTypeId.ROADMAP);
+        map.setOptions({styles:map_style.google_maps_customization_style});
+
+
+ var TorqueOptions = {
+            user:'fcc',
+            table:'lpfm_point',
+            column:'service_da',
+            steps:400,
+            resolution:4,
+            autoplay:false,
+            cumulative:true,
+            clock:true,
+            fps:6,
+            fitbounds:false,
+            blendmode:'lighter',
+            trails:false,
+            point_type:'circle',
+            cellsize:1,
+            subtitles:true
+        }
+
+
+       
+        Torque(function (env) {
+            Torque.app = new env.app.Instance();
+            torque = new Torque.app.addLayer(map, TorqueOptions);
+            Torque.env = env;
+        });
+
+ 		//map.setCenter(new google.maps.LatLng(40,-98));
+       
+
+    }
+   
+    function replay(){
+    	torque.pause();
+    }
+	
+    $(document).ready(function(){
+    	$('#btn-control').click(function(e) {
+    		e.preventDefault();
+        	$(this).toggleClass('play').toggleClass('pause');
+        	if (endOfPlay){ //a hack at start over, need to call it three times
+        		replay();
+        		replay();
+        		replay();
+        		endOfPlay=false;
+        	}
+        	else{
+        		replay();
+        	}
+        	
+        });	
+    	
+    	var sub = "<dl><dt>2000</dt>"
+         	+ "<dd>Commission authorizes the creation of the LPFM service (MM Docket 99-25)</dd>"
+         	+ "<dt>April 2001</dt>"
+         	+ "<dd>First LPFM construction permits issued</dd>"
+         	+ "<dt>July 2001</dt>"
+         	+ "<dd>First LPFM station goes on air</dd></dl>";
+    	 $('.torque_subs').html(sub);
+    });
+    
+    
+    </script>
+</head>
+<body onload="initialize()">
+    <h2 id="hd-pgSubTitle">Federal Communications Commission</h2>
+    <h1 id="hd-pgTitle">Evolution of LPFM Stations</h1>
+    <div id="btnControls">
+    	<a id="btn-control" class="btn play" href="#void"><span>Play or Pause</span></a>
+    </div>
+    <div id="map_canvas"></div>
+    <div class="torque_subs"></div>
+    <div class="torque_time"></div>
+    <a class="cartodb_logo" href="http://www.cartodb.com" target="_blank">CartoDB</a>
+</body>
+</html>
