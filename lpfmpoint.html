@@ -33,7 +33,13 @@
             zoom:4,
             mapTypeId:google.maps.MapTypeId.SATELLITE,
             mapTypeControl:false,
-            minZoom:1
+            minZoom:1,
+            zoomControl: true,
+            zoomControlOptions: {
+              style: google.maps.ZoomControlStyle.NORMAL
+            },
+            streetViewControl: false,
+             panControl: false
         });
 
         var map_style = {};
