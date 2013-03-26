@@ -10,16 +10,16 @@ For more information about Low Power FM in the United States, please [visit the 
 
 This project is one of a number of visualization tools being investigated to communcate policy issues in new formats. This time series intends to display how the change in polices have allowed more Low Power FM stations to be established. Additional projects were developed in conjunction with this one:
 
-* [LPFM Opportunities][lpfmrepo] 
+* [LPFM Opportunities Spatial Analysis repo][lpfmrepo] 
 * [LPFM Opportunities Map][lpfmmap]
 * [LPFM Channel finder API][api]
   
-  ## Data
+## Data
   
   * Data are stored in [a cartoDB table][cartodb] 
   * /data directory also contains a copy of the source data in JSON format (WGS 84) lpfm_points.json 
   
-  ## Inspiration
+## Inspiration
   
 Inspiration for this visualization comes from the Guardian UK’s [First World War Ship Movements][guk] and the good folks at [cartoDB][cdb] and their torque project. 
   
