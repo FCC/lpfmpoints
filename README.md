@@ -17,7 +17,7 @@ This project is one of a number of visualization tools being investigated to com
 ## Data
   
   * Data are stored in [a cartoDB table][cartodb] 
-  * /data directory also contains a copy of the source data in JSON format (WGS 84) lpfm_points.json 
+  * /data directory also contains a copy of the source data in GeoJSON format (WGS 84) lpfm_points.geojson 
   
 ## Inspiration
   
