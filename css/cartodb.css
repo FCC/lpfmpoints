@@ -1,3 +1,8 @@
+html, body, #map_canvas {
+  height: 100%;
+  margin: 0px;
+  padding: 0px
+}
 /*other stuff*/
 /*Marker infowindow*/
 div.cartodb_infowindow {position:absolute; display:block; width:214px; padding:0; visibility:hidden;}
