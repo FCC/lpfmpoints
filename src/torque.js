@@ -214,7 +214,7 @@ Torque.modules.layer = function (torque) {
             } 
             else {
                 this._current = this.start;
-            	console.log(this._current + " " + this.end)
+            	//console.log(this._current + " " + this.end)
             	//torque.running=false;
             }
 
