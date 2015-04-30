@@ -21,8 +21,9 @@ function TimePlayer(min_date, end, step, options) {
     this.user = options.user;
     this.t_column = options.column;
     this.resolution = options.resolution;
-    this.countby = options.countby
-    this.base_url = '//0.tiles.cartocdn.com/'+this.user+'/api/v2/sql';
+    this.countby = options.countby;
+    //this.base_url = 'http://0.tiles.cartocdn.com/'+this.user+'/api/v2/sql';
+	this.base_url = '//'+this.user+'.cartodb.com/api/v2/sql';
     this.options = options;
 }
 
